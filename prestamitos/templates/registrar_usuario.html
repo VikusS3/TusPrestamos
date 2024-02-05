@@ -1,0 +1,15 @@
+
+<article>
+    <header>
+        Crear Cuenta
+    </header>
+    <h1>{{error}}</h1>
+    <form action="/registrar_usuario/" method="post">
+
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button>
+            Registrarse
+        </button>
+    </form>
+</article>

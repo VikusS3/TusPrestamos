@@ -1,0 +1,17 @@
+<article>
+    <header>
+        <h1>Iniciar Sesion</h1>
+    </header>
+    <h1>{{error}}</h1>
+        <form action="" method="post">
+            
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button>
+                Ingresar
+            </button>
+        </form>
+
+
+    
+</article>
