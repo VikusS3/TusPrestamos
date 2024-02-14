@@ -1,16 +1,41 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <title>TusPrestamitos</title>
-</head>
-<body>
-    
-    <h1>¡Bienvenido a TusPrestamitos!</h1>
-    <p>¡Aquí podrás contralor tus dinero prestado</p>
-    <p>¡Regístrate y comienza a disfrutar de los beneficios que tenemos para ti!</p>
-    <a href="{% url 'login' %}">Iniciar sesión</a>
-    <a href="{% url 'registrar_usuario'  %}">Registrarse</a>
-</body>
+  </head>
+  <body>
+    <header class="header">
+      <img src="{% static 'img/imagen.png' %}" alt="" />
+
+      <nav class="navbar">
+        <a href="">Inicio</a>
+        <a href="">Sobre</a>
+        <a href="">Serivicios</a>
+        <a href="">Registrarte Ahora</a>
+      </nav>
+    </header>
+
+    <section class="inicio">
+      <div class="info">
+        <h1>¡Bienvenido a TusPrestamitos!</h1>
+        <h4>Administra tus prestamos correctamente</h4>
+      </div>
+      <div class="link">
+        <button>
+            <a href="{% url 'login' %}">Iniciar sesión</a>
+        </button>
+        <button>
+            <a href="{% url 'registrar_usuario'  %}">Registrarse</a>
+        </button>
+        
+      
+      </div>
+    </section>
+  </body>
 </html>
+
