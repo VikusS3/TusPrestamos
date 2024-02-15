@@ -1,6 +1,5 @@
 html{
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-color: #e4e4e4;
     box-sizing: border-box;
 }
 
@@ -11,19 +10,27 @@ body{
     height: 100vh;
     margin: 0;
     padding: 0;
+    background-color: #e4e4e4;
 }
 
+
 article{
-    border-radius: 20px;
-    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
     background-color: #313131;
+    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 header{
-    color: white;
+    color: #fff;
     opacity: 0.9;
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-bottom: -22px;
 }
 
@@ -40,33 +47,24 @@ form{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.8rem;
-}
-
-.inputs label{
-    color: white;
-    opacity: 0.9;
-    font-size: 1.5rem;
-    display: flex;
+    gap: 1.5rem;;
+    width: 100%;
 }
 
 .inputs input{
     padding: 0.5rem;
     border-radius: 5px;
     border: 1px solid #fff;
-    background-color: #383838;
-    color: white;
-    opacity: 0.9;
+    text-align: center;
+    background-color: #444444;
+    color: #fff;
     font-size: 1.2rem;
     transition-duration: 0.5s;
-    text-align: center;
 }
 
 .inputs input::placeholder{
-    color: white;
+    color: #fff;
     opacity: 0.8;
-    font-size: 1.2rem;
-    text-align: center;
 }
 
 .inputs input:hover{
@@ -94,37 +92,19 @@ button:hover{
 -moz-box-shadow: 0px 2px 48px -5px rgba(255,255,255,0.77);
 }
 
-.register{
-    color: white;
-    opacity: 0.9;
-    font-size: 1.2rem;
-    margin-top: 1rem;
-}
-
-.register a{
-    color: #0ddb0d;
-    text-decoration: none;
-    opacity: 0.7;
-    transition-duration: 0.5s;
-}
-
-.register a:hover{
+register a:hover{
     opacity: 1;
     transition: all 0.3s ease-in-out;
 }
 
 .back-arrow{
+    background-color: #2a9c04;
+    width: 30%;
+    border-radius: 2rem ;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1rem;
-    background-color: #2a9c04;
     padding: 0.5rem;
-    width: 30%;
-    margin-left: 5.8rem;
-    border-radius: 2rem;
-    opacity: 0.7;
-    transition-duration: 0.5s;
 }
 
 .back-arrow a{
@@ -139,4 +119,4 @@ button:hover{
     scale: 1.1;
 }
 
-/*TODO: Diseño responsive al login*/
+/*TODO: Diseño responsive al registrer*/

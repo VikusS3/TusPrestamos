@@ -15,11 +15,52 @@
   <form action="" method="post">
     {% csrf_token %}
     <div class="inputs">
-      <label for="username">Usuario</label>
-      <input type="text" id="username" name="username" required placeholder="Ingrese su Usuario"/>
-      <label for="password">Contraseña</label>
-      <input type="password" id="password" name="password" required placeholder="Ingrese su Contraseña"/>
+      <label for="username">User</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        required
+        placeholder="Ingrese su Usuario"
+      />
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        required
+        placeholder="Ingrese su Contraseña"
+      />
     </div>
     <button>Ingresar</button>
+
+    <div class="register">
+      <p>
+        ¿No tienes una cuenta?
+        <a href="{% url 'registrar_usuario'  %}">Registrate</a>
+      </p>
+
+      <div class="back-arrow">
+        <a href="{% url 'index' %}">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-arrow-narrow-left"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M5 12l14 0" />
+          <path d="M5 12l4 4" />
+          <path d="M5 12l4 -4" />
+        </svg>
+      </a>
+      </div>
+    </div>
   </form>
 </article>

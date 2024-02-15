@@ -53,9 +53,17 @@ def cerrar_sesion(request):
     return redirect('index')
 
 
+def my_profile(request):
+    return render(request, 'my_profile.html')
+
+def clientes(request):
+    return render(request, 'clientes.html')
+
 ## *TODO: crear las funcionalidades para las vistas de los prestamos y pagos
 def prestamos(request):
     return render(request, 'prestamos.html')
 
 def pagos(request):
     return render(request, 'pagos.html')
+
+

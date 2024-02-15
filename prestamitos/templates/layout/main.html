@@ -1,31 +1,29 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/main_style.css' %}" />
     <title>Tus Prestamitos</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <nav>
-            <a href="{% url 'home' %}">Tus Prestamitos</a>
-            <ul>
-                <li>
-                    <a href="{% url 'prestamos' %}">Prestamos</a>
-                    <a href="{% url 'pagos' %}">Pagos</a>
-                    <a href="{% url 'cerrar_sesion' %}">Cerrar Sesion</a>
-                </li>
-            </ul>
-        </nav>
+      <a href="{% url 'home' %}">Tus Prestamitos <-- AQUI IRA EL LOGO</a>
+      <nav>
+        <a href="{% url 'prestamos' %}">Prestamos</a>
+        <a href="{% url 'pagos' %}">Pagos</a>
+        <a href="{% url 'clientes' %}">Contactos</a>
+        <a href="{% url 'my_profile' %}">Mi Cuenta</a>
+        <a href="{% url 'cerrar_sesion' %}">Cerrar Sesion</a>
+      </nav>
     </header>
 
-    {% block content %}
-    {% endblock %}
-
+    <div class="contet">{% block content %} {% endblock %}</div>
 
     <footer>
-        <p>© 2024 Tus Prestamitos</p>
-
+      <p>© 2024 Tus Prestamitos</p>
     </footer>
-</body>
+  </body>
 </html>

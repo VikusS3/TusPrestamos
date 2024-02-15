@@ -1,15 +1,67 @@
+{% load static %}
+
+<head>
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{% static 'css/registrar_usuario.css' %}" />
+  <title>TusPrestamitos</title>
+</head>
 
 <article>
-    <header>
-        Crear Cuenta
-    </header>
-    <h1>{{error}}</h1>
-    <form action="/registrar_usuario/" method="post">
+  <header>
+    <h1>Crea una Cuenta</h1>
+  </header>
+  <h1>{{error}}</h1>
+  <form action="/registrar_usuario/" method="post">
+    {% csrf_token %}
+    <div class="inputs">
+     
+      <input
+        type="text"
+        id="username"
+        name="username"
+        required
+        placeholder="Ingrese su Usuario"
+      />
+    
+      <input
+        type="password"
+        id="password1"
+        name="password1"
+        required
+        placeholder="Ingrese su Contraseña"
+      />
 
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button>
-            Registrarse
-        </button>
-    </form>
+      <input
+        type="password"
+        id="password2"
+        name="password2"
+        required
+        placeholder="Confirme su Contraseña"
+      />
+    </div>
+    <button>Crear Cuenta</button>
+
+    <div class="back-arrow">
+        <a href="{% url 'index' %}">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-arrow-narrow-left"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M5 12l14 0" />
+          <path d="M5 12l4 4" />
+          <path d="M5 12l4 -4" />
+        </svg>
+      </a>
+      </div>
+  </form>
 </article>

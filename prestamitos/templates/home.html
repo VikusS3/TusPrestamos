@@ -1,7 +1,14 @@
 {% extends "layout/main.html"  %}
 
 {% block content %}
-<h1>Bienvenido</h1>
+<h1>
+    Bienvenido 
+    {% if user.is_authenticated %}
+        {{user.username}}
+    {% else %}
+        a TusPrestamitos
+    {% endif %}
+</h1>
 
 
 {% endblock %}
