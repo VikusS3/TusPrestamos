@@ -3,6 +3,15 @@ html{
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
 body{
     margin: 0;
     padding: 0;
@@ -93,5 +102,136 @@ body{
     color: #fff;
 }
 
+.sobre{
+    width: 100%;
+    background-color: #3a3737;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    margin-top: 50px;
+    height: 60vh;
+    /* height: 100vh; */
+}
+
+.img-sobre{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.img-sobre img{
+    width: 50%;
+    height: 100%;
+}
 
 
+.sobre-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin-right: 28px;
+}
+
+.sobre-content h2{
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 2.5rem;
+
+}
+
+.sobre-content p{
+    color: #fff;
+    font-size: 1.2rem;
+    text-wrap: wrap;
+}
+
+.servicios{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 80px 75px;
+    background-color: #42836c;
+}
+
+article{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    border-radius: 10px;
+    border: solid 1px #fff;
+    background-color: transparent;
+    margin: 0 20px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
+}
+
+article img{
+    width: 100px;
+    height: 100px;
+    margin-right: 30px;
+}
+
+.article-content h2{
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.article-content p{
+    color: #fff;
+    font-size: 1.2rem;
+    text-wrap: balance;
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    gap: 20px;
+    width: 100%;
+}
+
+footer p{
+    color: #000;
+    font-size: 1.2rem;
+}
+
+footer svg{
+    color: #000;
+    font-size: 2rem;
+    cursor: pointer;
+    width: 50px;
+}
+
+.icon-up{
+    position: relative;
+    bottom: 0;
+    left: 18rem;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+    border-radius: 20px;
+    height: 50px;
+    width: 50px;
+}
+
+.icon-up svg{
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    width: 50px;
+}
