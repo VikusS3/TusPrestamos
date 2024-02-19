@@ -179,6 +179,10 @@ article img{
     margin-right: 30px;
 }
 
+.img-article img{
+    margin-top: 50px;
+}
+
 .article-content h2{
     color: #fff;
     font-size: 1.5rem;
@@ -234,4 +238,5 @@ footer svg{
     font-size: 2rem;
     cursor: pointer;
     width: 50px;
+    margin-top: 5px;
 }

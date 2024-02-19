@@ -1,6 +1,128 @@
-{% extends "layout/main.html"  %}
+{% extends "layout/main.html" %} {% block content %} {% load static %}
+<!--traer mi css-->
+<link rel="stylesheet" href="{% static 'css/prestamos.css' %}" />
 
-{% block content %}
-<h1>Prestamos</h1>
+<section class="prestamos">
+  <div class="tools">
+    <form action="" method="get">
+      <input type="text" name="search" placeholder="Buscar prestamo" />
+      <button type="submit">Buscar</button>
+    </form>
+    <div class="add-prestamo">
+        <a href="">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+        </a>
+    </div>
+  </div>
+  <div class="list-prestamos">
+
+    <article class="article">
+      <div class="header-article">
+        <p>Estado</p>
+        <p>Monto</p>
+      </div>
+      <div class="prestamo">
+        <h2>Juan Perez</h2>
+        <p>Fecha de prestamo: 12/12/2021</p>
+      </div>
+      <footer class="article-footer">
+        <a href="#">Ver</a>
+        <a href="#">Editar</a>
+        <a href="#">Eliminar</a>
+      </footer>
+    </article>
+
+    <article class="article">
+        <div class="header-article">
+          <p>Estado</p>
+          <p>Monto</p>
+        </div>
+        <div class="prestamo">
+          <h2> Juan Perez</h2>
+          <p>Fecha de prestamo: 12/12/2021</p>
+        </div>
+        <footer class="article-footer">
+          <a href="#">Ver</a>
+          <a href="#">Editar</a>
+          <a href="#">Eliminar</a>
+        </footer>
+      </article>
+      <article class="article">
+        <div class="header-article">
+          <p>Estado</p>
+          <p>Monto</p>
+        </div>
+        <div class="prestamo">
+          <h2> Juan Perez</h2>
+          <p>Fecha de prestamo: 12/12/2021</p>
+        </div>
+        <footer class="article-footer">
+          <a href="#">Ver</a>
+          <a href="#">Editar</a>
+          <a href="#">Eliminar</a>
+        </footer>
+      </article>
+      <article class="article">
+        <div class="header-article">
+          <p>Estado</p>
+          <p>Monto</p>
+        </div>
+        <div class="prestamo">
+          <h2> Juan Perez</h2>
+          <p>Fecha de prestamo: 12/12/2021</p>
+        </div>
+        <footer class="article-footer">
+          <a href="#">Ver</a>
+          <a href="#">Editar</a>
+          <a href="#">Eliminar</a>
+        </footer>
+      </article>
+      <article class="article">
+        <div class="header-article">
+          <p>Estado</p>
+          <p>Monto</p>
+        </div>
+        <div class="prestamo">
+          <h2> Juan Perez</h2>
+          <p>Fecha de prestamo: 12/12/2021</p>
+        </div>
+        <footer class="article-footer">
+          <a href="#">Ver</a>
+          <a href="#">Editar</a>
+          <a href="#">Eliminar</a>
+        </footer>
+      </article>
+      <article class="article">
+        <div class="header-article">
+          <p>Estado</p>
+          <p>Monto</p>
+        </div>
+        <div class="prestamo">
+          <h2> Juan Perez</h2>
+          <p>Fecha de prestamo: 12/12/2021</p>
+        </div>
+        <footer class="article-footer">
+          <a href="#">Ver</a>
+          <a href="#">Editar</a>
+          <a href="#">Eliminar</a>
+        </footer>
+      </article>
+      <article class="article">
+        <div class="header-article">
+          <p>Estado</p>
+          <p>Monto</p>
+        </div>
+        <div class="prestamo">
+          <h2> Juan Perez</h2>
+          <p>Fecha de prestamo: 12/12/2021</p>
+        </div>
+        <footer class="article-footer">
+          <a href="#">Ver</a>
+          <a href="#">Editar</a>
+          <a href="#">Eliminar</a>
+        </footer>
+      </article>
+  </div>
+</section>
 
 {% endblock %}
