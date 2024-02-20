@@ -1,3 +1,4 @@
+from django import forms
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -29,10 +30,12 @@ def login_user(request):
         else:
             login(request, user)
             return redirect('home')
+        
 
 def registrar_usuario(request):
     if request.method == 'GET':
         return render(request, 'registrar_usuario.html', {'form': UserCreationForm})
+    
     else:
         if request.POST["password1"] == request.POST["password2"]:
             try:
