@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from .models import Cliente, Prestamo, Pago
 
 # Create your views here.
 def index(request):
@@ -60,13 +61,22 @@ def my_profile(request):
     return render(request, 'my_profile.html')
 
 def clientes(request):
-    return render(request, 'clientes.html')
+    clients= Cliente.objects.all()
+    return render(request, 'clientes.html', {'clients': clients})
 
 ## *TODO: crear las funcionalidades para las vistas de los prestamos y pagos
 def prestamos(request):
-    return render(request, 'prestamos.html')
+    prestamos= Prestamo.objects.all()
+    return render(request, 'prestamos.html',{'prestamos': prestamos})
 
 def pagos(request):
-    return render(request, 'pagos.html')
+    ##traer los pagos y como es llave foreanea traer el nombre del cliente porque esta relacionada con 
+    ##el modelo de prestamo
+    pagos= Pago.objects.select_related('prestamo__cliente').all()
+    
+    context= {
+        'pagos': pagos
+    }
+    return render(request, 'pagos.html', context)
 
 
