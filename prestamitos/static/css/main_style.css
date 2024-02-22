@@ -33,6 +33,10 @@ a{
     color: #fff;
 }
 
+a:hover{
+  text-decoration: underline;
+}
+
 .contet{
     display: flex;
     justify-content: center;

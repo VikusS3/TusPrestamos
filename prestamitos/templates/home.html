@@ -1,16 +1,7 @@
-{% extends "layout/main.html"  %}
-
-{% block content %}
+{% extends "layout/main.html" %} {% block content %}
 <h1>
-    Bienvenido 
-    {% if user.is_authenticated %}
-        {{user.username}}
-    {% else %}
-        a TusPrestamitos la aplicacion para guardar prestamos
-    {% endif %}
+  Bienvenido {% if user.is_authenticated %} {{user.username}} {% else %} a
+  TusPrestamitos la aplicacion para guardar prestamos {% endif %}
 </h1>
 
-
-{% endblock %}
-```
-
+{% endblock %} ```

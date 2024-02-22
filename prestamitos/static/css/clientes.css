@@ -110,18 +110,47 @@ figure img{
   padding: 5px;
   border-radius: 5px;
   margin-right: 10px;
+  transition-duration: 0.3s ;
 }
 
 .delete-contact a{
   color: #050505;
+  opacity: 0.6;
+}
+
+.delete-contact:hover{
+  background-color: #ff0000;
+  transition: 0.5s ease-out;
+}
+
+.delete-contact:hover a{
+ opacity: 1;
 }
 
 .edit-contact{
   padding: 5px;
   border-radius: 5px;
   margin-right: 10px;
+  transition-duration: 0.3s;
 }
 
-.edit-contact a{
-  color: #050505;
+.edit-contact:hover{
+  background-color: #f8e917;
+  transition: 0.5s ease-out;
+}
+
+
+.add-cliente .btn-add{
+  background-color: transparent;
+  color: #fff;
+}
+
+.edit-button{
+  border: none;
+  background-color: transparent;
+  opacity: 0.6;
+}
+
+.edit-button:hover{
+  opacity: 1;
 }

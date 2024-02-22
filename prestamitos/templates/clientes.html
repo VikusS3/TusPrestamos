@@ -1,15 +1,13 @@
 {% extends "layout/main.html" %} {% load static %} {% block content %}
 
-
 <link rel="stylesheet" href="{% static 'css/clientes.css' %}" />
 
 <section class="clientes">
-
-    <div class="tools">
-        <form action="" method="get">
-        <input type="text" name="search" placeholder="Buscar cliente" />
-        <button type="submit">
-            <svg
+  <div class="tools">
+    <form action="" method="get">
+      <input type="text" name="search" placeholder="Buscar cliente" />
+      <button type="submit">
+        <svg
           xmlns="http://www.w3.org/2000/svg"
           class="icon icon-tabler icon-tabler-search"
           width="24"
@@ -25,47 +23,135 @@
           <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
           <path d="M21 21l-6 -6" />
         </svg>
+      </button>
+    </form>
+    <div class="add-cliente">
+     
+        <button class="btn-add" onclick="abrir_modal_creacion('{% url 'registrar_cliente' %}')">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-plus"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M12 5l0 14" />
+            <path d="M5 12l14 0" />
+          </svg>
         </button>
-        </form>
-        <div class="add-cliente">
-            <a href="">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
-            </a>
-        </div>
-    </div>
-
-   
-    <div class="list-clientes">
-        {% for client in clients %}
-        <article class="client-data">
-            <figure>
-                <img src="https://i.ibb.co/RPMSC8c/SAUL.jpg" alt="">
-            </figure>
-            <div class="info">
-                <h2>{{client.nombre}}</h2>
-                <p>{{client.telefono}}</p>
-                <p>{{client.correo}}</p>
-            </div>
-             <div class="tools-contact">
-                <div class="delete-contact">
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
-                    </a>
-                </div>
-                <div class="edit-contact">
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg>
-                    </a>
-                </div>
-            </div>
-        </article>
-        {% endfor %}
-    </div>
     
+    </div>
+  </div>
+
+  <div class="list-clientes">
+    {% for client in clients %}
+    <article class="client-data">
+      <figure>
+        <img src="https://i.ibb.co/RPMSC8c/SAUL.jpg" alt="" />
+      </figure>
+      <div class="info">
+        <h2>{{client.nombre}}</h2>
+        <p>{{client.telefono}}</p>
+        <p>{{client.correo}}</p>
+      </div>
+      <div class="tools-contact">
+        <div class="delete-contact">
+            <a href="{% url 'eliminar_cliente' client.id %}">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-trash"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M4 7l16 0" />
+              <path d="M10 11l0 6" />
+              <path d="M14 11l0 6" />
+              <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+              <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+            </svg>
+          </a>
+        </div>
+        <div class="edit-contact">
+            <button class="edit-button" onclick="abrir_modal_edicion('{% url 'editar_cliente' client.id %}')">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-pencil"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path
+                d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"
+              />
+              <path d="M13.5 6.5l4 4" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
 </section>
 
+<div class="modal" id="creacion" role="dialog">
+
+</div>
+
+<div class="second-modal" id="edicion" role="dialog">
+
+</div>
 
 
 
+<script>
+    function abrir_modal_creacion(url) {
+        $.ajax({
+        url: url,
+        success: function (result) {
+            $("#creacion").html(result);
+            $("#creacion").show();
+        },
+        });
+    }
+    
+    function cerrarModal() {
+        $("#creacion").hide();
+    }
+
+    function abrir_modal_edicion(url) {
+        $.ajax({
+        url: url,
+        success: function (result) {
+            $("#edicion").html(result);
+            $("#edicion").show();
+        },
+        });
+    }
+
+    function cerrarModalEdicion() {
+        $("#edicion").hide();
+    }
+
+
+</script>
 
 {% endblock %}

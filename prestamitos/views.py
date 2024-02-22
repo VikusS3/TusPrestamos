@@ -4,6 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from .models import Cliente, Prestamo, Pago
+from .forms import *
 
 # Create your views here.
 def index(request):
@@ -63,6 +64,37 @@ def my_profile(request):
 def clientes(request):
     clients= Cliente.objects.all()
     return render(request, 'clientes.html', {'clients': clients})
+
+def registrar_cliente(request):
+    if request.method == 'GET':
+        return render(request, 'registrar_cliente.html', {'form': ClienteForm()})
+    else:
+        try:
+            form = ClienteForm(request.POST)
+            form.save()
+            return redirect('clientes')
+        except ValueError:
+            return render(request, 'registrar_cliente.html', {'form': ClienteForm(), 'error': 'Error al crear el cliente'})
+        
+        
+def editar_cliente(request, id):
+    cliente = get_object_or_404(Cliente, id=id)
+    if request.method == 'GET':
+        form = ClienteForm(instance=cliente)
+        return render(request, 'editar_cliente.html', {'cliente': cliente, 'form': form})
+    else:
+        try:
+            form = ClienteForm(request.POST, instance=cliente)
+            form.save()
+            return redirect('clientes')
+        except ValueError:
+            return render(request, 'editar_cliente.html', {'cliente': cliente, 'form': form, 'error': 'Error al editar el cliente'})
+        
+def eliminar_cliente(request, id):
+    cliente = get_object_or_404(Cliente, id=id)
+    if request.method == 'POST' or request.method == 'GET':
+        cliente.delete()
+        return redirect('clientes')
 
 ## *TODO: crear las funcionalidades para las vistas de los prestamos y pagos
 def prestamos(request):
