@@ -79,4 +79,3 @@ def pagos(request):
     }
     return render(request, 'pagos.html', context)
 
-
