@@ -134,6 +134,14 @@ figure img{
   transition-duration: 0.3s;
 }
 
+.edit-contact a{
+  color: #050505 !important;
+  opacity: 0.6;
+}
+
+.edit-contact a:hover{
+  opacity: 1;
+}
 .edit-contact:hover{
   background-color: #f8e917;
   transition: 0.5s ease-out;
@@ -145,7 +153,7 @@ figure img{
   color: #fff;
 }
 
-.edit-button{
+/* .edit-button{
   border: none;
   background-color: transparent;
   opacity: 0.6;
@@ -153,4 +161,4 @@ figure img{
 
 .edit-button:hover{
   opacity: 1;
-}
+} */

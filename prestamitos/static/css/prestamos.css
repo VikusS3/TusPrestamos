@@ -136,3 +136,8 @@
   border-radius: 5px;
   font-weight: bold;
 }
+
+.add-prestamo .btn-add{
+  background-color: transparent ;
+  color: #fff;
+}

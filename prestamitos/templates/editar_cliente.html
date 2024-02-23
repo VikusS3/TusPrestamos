@@ -1,16 +1,17 @@
 <div id="myModal" class="second-modal">
-   
+  
     <div class="modal-content">
-        
-        <form class="form-edicion" method="post">
-            <h2>Editar Cliente</h2>
+       
+        <form method="post" class="form-edicion">
+            <h1>Editar Cliente</h1>
             {% csrf_token %}
-            {{ form.as_p }}
+                <input type="text" name="nombre" value="{{ cliente.nombre }}" placeholder="Nombre">
+                <input type="text" name="telefono" value="{{ cliente.telefono }}" placeholder="Telefono">
+                <input type="text" name="correo" value="{{ cliente.correo }}" placeholder="Correo">
             <div class="acciones-modal">
                 <input type="submit" value="Editar">
                 <button class="close" onclick="cerrarModalEdicion()">Cerrar</button>
             </div>
-            
         </form>
         
     </div>
@@ -22,7 +23,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0,0,0,0.7);
+        background-color: #282828;
     }
     
     .modal-content {

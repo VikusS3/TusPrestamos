@@ -11,7 +11,7 @@
       </button>
     </form>
     <div class="add-prestamo">
-      <a href="">
+      <button class="btn-add" onclick="abrir_modal_creacion('{% url 'agregar_prestamo' %}')">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="icon icon-tabler icon-tabler-plus"
@@ -28,7 +28,7 @@
           <path d="M12 5l0 14" />
           <path d="M5 12l14 0" />
         </svg>
-      </a>
+      </button>
     </div>
   </div>
   <div class="list-prestamos">
@@ -43,14 +43,23 @@
         <p>S/.{{prestamo.monto}}</p>
       </div>
       <div class="prestamo">
-       <h2>{{prestamo.cliente}}</h2>
+       <h2>{{prestamo.cliente.nombre}}</h2>
         <p>Fecha del prestamo: {{prestamo.fecha_prestamo}}</p>
         {% if prestamo.tasa_interes == 0 %}
         <p>Tasa de Interes: Sin interes</p>
         {% else %}
-        <p>Tasa de Interes: {{prestamo.tasa_interes}}%</p>
+           <p>Tasa de Interes: {{prestamo.tasa_interes}}%</p>
+           <p>
+            Monto a pagar: S/. {{prestamo.monto_total}}
+           </p>
         {% endif %}
         <p>Plazo de Dias: {{prestamo.plazo_dias}} </p>	
+
+        {% if prestamo.fecha_vencimiento%}
+        <p>Fecha de Vencimiento: {{prestamo.fecha_vencimiento}}</p>
+        {% endif %}
+
+
       </div>
       <div class="article-footer">
         <a href="#">
@@ -70,7 +79,7 @@
             <path d="M5 12l5 5l10 -10" />
           </svg>
         </a>
-        <a href="#"
+        <a href="{% url 'editar_prestamo' prestamo.id %}"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
             class="icon icon-tabler icon-tabler-pencil"
@@ -87,7 +96,7 @@
             <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
             <path d="M13.5 6.5l4 4" />
           </svg>
-        </a>
+        </>
         <a href="#">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -114,5 +123,27 @@
     {% endfor %}
   </div>
 </section>
+
+<div class="modal" id="creacion" role="dialog">
+
+</div>
+
+
+
+<script>
+    function abrir_modal_creacion(url) {
+        $.ajax({
+        url: url,
+        success: function (result) {
+            $("#creacion").html(result);
+            $("#creacion").show();
+        },
+        });
+    }
+    
+    function cerrarModal() {
+        $("#creacion").hide();
+    }
+</script>
 
 {% endblock %}

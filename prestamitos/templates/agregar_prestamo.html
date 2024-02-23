@@ -1,0 +1,119 @@
+<div id="myModal" class="modal">
+   
+    <div class="modal-content">
+        
+        <form class="myform" method="post" action="{% url 'agregar_prestamo' %}">
+            {% csrf_token %}
+            <h2>Registrar Prestamo</h2>
+            <select name="cliente" id="id_cliente" required>
+                <option value="">Seleccione un cliente</option>
+                {% for cliente in clientes %}
+                <option value="{{cliente.id}}">{{cliente.nombre}}</option>
+                {% endfor %}
+            </select>
+            <input type="number" name="monto" id="id_monto" placeholder="Monto" required>
+            <input type="date" name="fecha_prestamo" id="id_fecha_prestamo" required>
+            <input type="number" name="tasa_interes" id="id_tasa_interes" placeholder="Tasa de Interes" required>
+            <input type="number" name="plazo_dias" id="id_plazo_dias" placeholder="Plazo de Dias" required>
+            <input type="hidden" name="estado" id="id_estado" value="0">
+            <div class="acciones-modal">
+                <input type="submit" value="Registrar">
+                <button class="close" onclick="cerrarModal()">Cerrar</button>
+            </div>
+            
+        </form>
+        
+    </div>
+</div>
+<style>
+    .modal {
+        position: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.7);
+    }
+    
+    .modal-content {
+        margin-top: 50px;
+      display: flex;
+      background-color: #7a7a7a;
+      color: #fff;
+      align-items: center;
+      justify-content: center;
+      width: 35%;
+      height: auto;
+      padding: 20px;
+        border-radius: 10px;
+        box-shadow: 3px -1px 24px -2px rgba(55,255,21,1);
+        -webkit-box-shadow: 3px -1px 24px -2px rgba(55,255,21,1);
+        -moz-box-shadow: 3px -1px 24px -2px rgba(55,255,21,1);
+                border-radius: 10px;
+    }
+
+    .myform{
+      display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-self: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .myform input{
+        width: 50%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: none;
+        text-align: center;
+    }
+
+    .myform select{
+        width: 50%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: none;
+    }
+   
+    
+    .acciones-modal{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+      align-items: center;
+        width: 100%;
+    }
+
+    .acciones-modal input, .close{
+        width: 40%;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        text-align: center;
+        color: #000;
+    }
+    
+    .acciones-modal input{
+        background-color: #00ff00;
+        color: #fff;
+        font-weight: bold;
+        font-size: 1.2em;
+        cursor: pointer;
+    }
+
+    .acciones-modal button{
+        background-color: #ff0000;
+        color : #fff;
+        font-weight: bold;
+        font-size: 1.2em;
+        cursor: pointer;
+    }
+
+   
+</style>
