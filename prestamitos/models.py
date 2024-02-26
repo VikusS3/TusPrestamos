@@ -28,9 +28,15 @@ class Prestamo(models.Model):
     def fecha_vencimiento(self):
         return self.fecha_prestamo + timezone.timedelta(days=self.plazo_dias)
     
+    #que solo deuevle con dos decimales
     def monto_total(self):
-        return self.monto + (self.monto * self.tasa_interes / 100)
+        return round(self.monto + (self.monto * (self.tasa_interes / 100)), 2)
     
+    def calcular_cantidad_restante(self):
+        pagos_realizados = self.pago_set.all()
+        cantidad_pagada = sum(pago.monto_pago for pago in pagos_realizados)
+        cantidad_restante = self.monto - cantidad_pagada
+        return cantidad_restante
     
     
 class Pago(models.Model):

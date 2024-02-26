@@ -1,7 +1,12 @@
-{% extends "layout/main.html" %} {% block content %}
-<h1>
-  Bienvenido {% if user.is_authenticated %} {{user.username}} {% else %} a
-  TusPrestamitos la aplicacion para guardar prestamos {% endif %}
-</h1>
+{% extends "layout/main.html" %} {% load static %} {% block content %}
+
+<link rel="stylesheet" href="{% static 'css/home.css' %}" />
+
+<section class="home">
+  <h1>
+    Bienvenido {% if user.is_authenticated %} {{user.username}} {% else %} a
+    TusPrestamitos la aplicacion para guardar prestamos {% endif %}
+  </h1>
+</section>
 
 {% endblock %} ```

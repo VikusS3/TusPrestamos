@@ -1,119 +1,29 @@
+{%load static%}
+
+
+<link rel="stylesheet" href="{% static 'css/editar-prestamo.css' %}" />
+
 <div id="myModal" class="modal">
 
     <div class="modal-content">
 
-        <form class="myform" method="post">
+        <form class="formulario-editar" method="post">
             {% csrf_token %}
-            <h2>Editar Prestamo</h2>
-            <div class="control">
-                <input type="hidden" name="id" value="{{ prestamo.id }}">
-            </div>
-            <label for="cliente">Cliente</label>
-            <input type="text" name="cliente" value="{{ prestamo.cliente }}" placeholder="Cliente" readonly>
-            <input type="text" name="monto" value="{{ prestamo.monto }}" placeholder="Monto">
-            <input type="text" name="tasa_interes" value="{{ prestamo.tasa_interes }}" placeholder="Tasa de Interes">
-            <input type="text" name="monto_total" value="{{ prestamo.monto_total }}" placeholder="Monto Total">
-            <input type="text" name="plazo_dias" value="{{ prestamo.plazo_dias }}" placeholder="Plazo de Dias">
-            <input type="date" name="fecha_prestamo" value="{{ prestamo.fecha_prestamo }}" placeholder="Fecha de Prestamo">
-            <input type="text" name="fecha_vencimiento" value="{{ prestamo.fecha_vencimiento }}" placeholder="Fecha de Vencimiento">
-
+            <h1>Editar Prestamo</h1>
+            {{ form.as_p }}
+           
             <div class="acciones-modal">
                 <input type="submit" value="editar">
-                <button class="close" onclick="cerrarModal()">Cerrar</button>
+                <button class="close">Cerrar</button>
             </div>
+           
         </form>
 
     </div>
 </div>
-<style>
 
-    .modal {
-        position: fixed;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-    }
-
-    .modal-content {
-        margin-top: 50px;
-        display: flex;
-        background-color: #7a7a7a;
-        color: #fff;
-        align-items: center;
-        justify-content: center;
-        width: 35%;
-        height: auto;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 3px -1px 24px -2px rgba(55, 255, 21, 1);
-        -webkit-box-shadow: 3px -1px 24px -2px rgba(55, 255, 21, 1);
-        -moz-box-shadow: 3px -1px 24px -2px rgba(55, 255, 21, 1);
-        border-radius: 10px;
-    }
-
-    .myform {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-self: center;
-        gap: 10px;
-        width: 100%;
-    }
-
-    .myform input {
-        width: 50%;
-        padding: 10px;
-        margin: 10px 0;
-        border-radius: 5px;
-        border: none;
-        text-align: center;
-    }
-
-    .myform select {
-        width: 50%;
-        padding: 10px;
-        margin: 10px 0;
-        border-radius: 5px;
-        border: none;
-    }
-
-
-    .acciones-modal {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        width: 100%;
-    }
-
-    .acciones-modal input,
-    .close {
-        width: 40%;
-        padding: 10px;
-        border-radius: 5px;
-        border: none;
-        text-align: center;
-        color: #000;
-    }
-
-    .acciones-modal input {
-        background-color: #00ff00;
-        color: #fff;
-        font-weight: bold;
-        font-size: 1.2em;
-        cursor: pointer;
-    }
-
-    .acciones-modal button {
-        background-color: #ff0000;
-        color: #fff;
-        font-weight: bold;
-        font-size: 1.2em;
-        cursor: pointer;
-    }
-</style>
+<script>
+    document.getElementById("id_cliente").addEventListener("mousedown", function(event){
+        event.preventDefault();
+    });
+</script>

@@ -1,0 +1,32 @@
+<!-- pagar_prestamo.html -->
+
+{% extends 'layout/main.html' %}
+
+{% block content %}
+  <h2>Detalles del Préstamo</h2>
+  <p>Cliente: {{ prestamo.cliente.nombre }}</p>
+  <p>Monto inicial: {{ prestamo.monto }}</p>
+
+  <!-- Mostrar progreso de pagos -->
+  <h3>Progreso de Pagos</h3>
+  <p>Cantidad restante: {{ prestamo.calcular_cantidad_restante }}</p>
+  {% if prestamo.calcular_cantidad_restante == 0 %}
+    {% if prestamo.completado %}
+      <p>¡Préstamo completado!</p>
+    {% else %}
+      <p>¡Préstamo pagado completamente! Pendiente de actualización del monto.</p>
+    {% endif %}
+  {% else %}
+    <p>Préstamo incompleto</p>
+  {% endif %}
+
+  <!-- Formulario para realizar un nuevo pago -->
+  <h3>Realizar Nuevo Pago</h3>
+  <form method="post" action="{% url 'pagar_prestamo' prestamo.id %}">
+    {% csrf_token %}
+    {{ form_pago.as_p }}
+    <input type="submit" value="Pagar">
+    <a style="color:#000;" href="{%url 'prestamos'%}">Volver</a>
+  </form>
+
+{% endblock %}

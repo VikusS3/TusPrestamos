@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from .models import Cliente, Prestamo, Pago
 from django.contrib.auth.decorators import login_required
 from .forms import *
+from django.db.models import F
 
 # Create your views here.
 def index(request):
@@ -147,10 +148,47 @@ def editar_prestamo(request, id):
         except ValueError:
             return render(request, 'editar_prestamo.html', {'prestamo': prestamo, 'form': form})
 
+        
+     
+@login_required
+def pagar_prestamo(request, id):
+    prestamo = get_object_or_404(Prestamo, id=id, user=request.user)
+
+    if request.method == 'POST':
+        form_pago = PagoForm(request.POST)
+        if form_pago.is_valid():
+            monto_pago = form_pago.cleaned_data['monto_pago']
+            fecha_pago = form_pago.cleaned_data['fecha_pago']
+            Pago.objects.create(prestamo=prestamo, monto_pago=monto_pago, fecha_pago=fecha_pago)
+            
+            Prestamo.objects.filter(id=prestamo.id).update(monto=F('monto') - monto_pago)
+
+
+            if prestamo.calcular_cantidad_restante() == 0:
+                prestamo.pagado = True
+                prestamo.save()
+                
+
+            return redirect('prestamos')
+        else:
+            return render(request, 'pagar_prestamo.html', {'prestamo': prestamo, 'form_pago': form_pago})
+    elif request.method == 'GET':
+        form_pago = PagoForm(initial={'prestamo': prestamo})  
+        return render(request, 'pagar_prestamo.html', {'prestamo': prestamo, 'form_pago': form_pago})
+                
+       
+    else:
+        return render(request, 'prestamos.html', {'error': 'Error al pagar el prestamo'})
+    
+    
+def eliminar_prestamo(request, id):
+    prestamo = get_object_or_404(Prestamo, id=id, user=request.user)
+    if request.method == 'POST' or request.method == 'GET':
+        prestamo.delete()
+        return redirect('prestamos')
+
 ## *TODO: crear las funcionalidades para las vistas de los pagos
 def pagos(request):
-    ##traer los pagos y como es llave foreanea traer el nombre del cliente porque esta relacionada con 
-    ##el modelo de prestamo
     pagos= Pago.objects.select_related('prestamo__cliente').all()
     
     context= {
