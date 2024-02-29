@@ -40,10 +40,13 @@
 </article>
 {% endblock %}
 
-
+<!-- Script para evitar que se despliegue el dropdown -->
+<!--TODO: VERIFICAR SI FUNCIONA DE VERDAD QUE NO SE DESPLIEGUE-->
 <script>
- //hacer que no se desplique el dropdown
+  //hacer que no se desplique el dropdown
   document.getElementById("id_prestamo").addEventListener("mousedown", function(event){
       event.preventDefault();
   });
 </script>
+
+
