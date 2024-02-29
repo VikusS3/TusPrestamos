@@ -3,30 +3,47 @@
 {% extends 'layout/main.html' %}
 
 {% block content %}
-  <h2>Detalles del Préstamo</h2>
-  <p>Cliente: {{ prestamo.cliente.nombre }}</p>
-  <p>Monto inicial: {{ prestamo.monto }}</p>
 
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/pagar_prestamo.css' %}" />
+<article class="contenido-pago">
+
+  <div class="info-pago">
+    <h2>Detalles del Préstamo</h2>
+    <p><span>Cliente:</span> {{ prestamo.cliente.nombre }}</p>
+    <p><span>Monto inicial:</span> {{ prestamo.total_pagar }}</p>
+  </div>
   <!-- Mostrar progreso de pagos -->
-  <h3>Progreso de Pagos</h3>
-  <p>Cantidad restante: {{ prestamo.calcular_cantidad_restante }}</p>
-  {% if prestamo.calcular_cantidad_restante == 0 %}
-    {% if prestamo.completado %}
-      <p>¡Préstamo completado!</p>
+  <div class="proceso-pago">
+    <h3>Progreso de Pagos</h3>
+    <p><span>Cantidad restante:</span> {{ prestamo.calcular_cantidad_restante }}</p>
+    {% if prestamo.calcular_cantidad_restante == 0 %}
+      {% if prestamo.completado %}
+        <p><span class="Completo">¡Préstamo completado!</span></p>
+      {% endif %}
     {% else %}
-      <p>¡Préstamo pagado completamente! Pendiente de actualización del monto.</p>
+      <p><span class="Incompleto">Préstamo incompleto </span></p>
     {% endif %}
-  {% else %}
-    <p>Préstamo incompleto</p>
-  {% endif %}
-
+  </div>
   <!-- Formulario para realizar un nuevo pago -->
-  <h3>Realizar Nuevo Pago</h3>
-  <form method="post" action="{% url 'pagar_prestamo' prestamo.id %}">
-    {% csrf_token %}
-    {{ form_pago.as_p }}
-    <input type="submit" value="Pagar">
-    <a style="color:#000;" href="{%url 'prestamos'%}">Volver</a>
-  </form>
-
+  <div class="pago">
+    <h3>Realizar Nuevo Pago</h3>
+    <form method="post" action="{% url 'pagar_prestamo' prestamo.id %}">
+      {% csrf_token %}
+      {{ form_pago.as_p }}
+    <footer class="buttons">
+      <button value="Pagar">Pagar</button>
+      <a href="{%url 'prestamos'%}">Volver</a>
+    </footer>
+    </form>
+  </div>
+</article>
 {% endblock %}
+
+
+<script>
+ //hacer que no se desplique el dropdown
+  document.getElementById("id_prestamo").addEventListener("mousedown", function(event){
+      event.preventDefault();
+  });
+</script>

@@ -7,8 +7,8 @@ class ClienteAdmin(admin.ModelAdmin):
     search_fields = ('nombre', 'telefono', 'correo', 'user__username')
     
 class PrestamoAdmin(admin.ModelAdmin):
-    list_display = ('cliente', 'monto', 'fecha_prestamo', 'tasa_interes', 'plazo_dias', 'pagado' , 'user')
-    search_fields = ('cliente__nombre', 'monto', 'fecha_prestamo', 'tasa_interes', 'plazo_dias', 'pagado', 'user__username')
+    list_display = ('cliente', 'monto', 'fecha_prestamo', 'tasa_interes','total_pagar' , 'plazo_dias', 'pagado' , 'user')
+    search_fields = ('cliente__nombre', 'monto', 'fecha_prestamo', 'tasa_interes','total_pagar' ,'plazo_dias', 'pagado', 'user__username')
 
 class PagoAdmin(admin.ModelAdmin):
     list_display = ('prestamo', 'monto_pago', 'fecha_pago')

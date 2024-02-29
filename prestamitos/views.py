@@ -163,10 +163,14 @@ def pagar_prestamo(request, id):
             
             Prestamo.objects.filter(id=prestamo.id).update(monto=F('monto') - monto_pago)
 
-
-            if prestamo.calcular_cantidad_restante() == 0:
-                prestamo.pagado = True
-                prestamo.save()
+            print(prestamo.cantidad_pagada())
+            print(prestamo.total_pagar)
+            print(prestamo.calcular_cantidad_restante())
+            if prestamo.calcular_cantidad_restante() == 0 or prestamo.calcular_cantidad_restante() < 0:
+                print(prestamo.cantidad_pagada())
+                print(prestamo.total_pagar)
+                print(prestamo.calcular_cantidad_restante())
+                Prestamo.objects.filter(id=prestamo.id).update(pagado=True)
                 
 
             return redirect('prestamos')

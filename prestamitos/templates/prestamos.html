@@ -39,8 +39,20 @@
         <p class="pendiente">Pendiente</p>
         {% else %}
         <p class="pagado">Pagado</p>
-        {%endif%}
-        <p>S/.{{prestamo.monto}}</p>
+        {%endif%} 
+        
+      
+        
+      {% if prestamo.tasa_interes == 0 %}
+        <p>S/.{{ prestamo.monto }}</p>
+       {% else %}
+        <!--Si el monto es menor a 0 que ponga 0--> 
+        {% if prestamo.monto < 0 %}
+          <p>S/.0,00</p>
+        {% else %}
+          <p>S/.{{ prestamo.calcular_cantidad_restante|floatformat:2 }}</p>
+        {% endif %}
+      {% endif %}
       </div>
       <div class="prestamo">
        <h2>{{prestamo.cliente.nombre}}</h2>
@@ -50,7 +62,7 @@
         {% else %}
            <p>Tasa de Interes: {{prestamo.tasa_interes}}%</p>
            <p>
-            Monto a pagar: S/. {{prestamo.monto_total}}
+            Monto a pagar: S/. {{prestamo.total_pagar|floatformat:2}}
            </p>
         {% endif %}
         <p>Plazo de Dias: {{prestamo.plazo_dias}} </p>	
@@ -60,43 +72,49 @@
         {% endif %}
 
 
+
       </div>
       <div class="article-footer">
-        <a href="{% url 'pagar_prestamo' prestamo.id %}">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-check"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M5 12l5 5l10 -10" />
-          </svg>
-        </a>
-        <a href="{% url 'editar_prestamo' prestamo.id %}"
-          ><svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-pencil"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
-            <path d="M13.5 6.5l4 4" />
-          </svg>
-        </>
+        {% if prestamo.pagado == False %}
+          <a href="{% url 'pagar_prestamo' prestamo.id %}">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-check"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M5 12l5 5l10 -10" />
+            </svg>
+          </a>
+            {% if prestamo.cantidad_pagada <= 0 %}
+            <a href="{% url 'editar_prestamo' prestamo.id %}"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-pencil"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+                <path d="M13.5 6.5l4 4" />
+              </svg>
+            </a>
+            {% endif %}
+          
+          {% endif %}
         <a href="{% url 'eliminar_prestamo' prestamo.id %}">
           <svg
             xmlns="http://www.w3.org/2000/svg"

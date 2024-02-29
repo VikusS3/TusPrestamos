@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 from django.contrib.auth.models import User
 from django.utils import timezone
 
@@ -15,9 +16,11 @@ class Cliente(models.Model):
     
 class Prestamo(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    monto = models.DecimalField(max_digits=10, decimal_places=2)
+    #que no se pase de 0 el monto
+    monto = models.DecimalField(max_digits=10, decimal_places=2 )
     fecha_prestamo = models.DateField(default=timezone.now)
     tasa_interes = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    total_pagar = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     plazo_dias = models.IntegerField()
     pagado = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
@@ -28,15 +31,27 @@ class Prestamo(models.Model):
     def fecha_vencimiento(self):
         return self.fecha_prestamo + timezone.timedelta(days=self.plazo_dias)
     
-    #que solo deuevle con dos decimales
     def monto_total(self):
         return round(self.monto + (self.monto * (self.tasa_interes / 100)), 2)
     
+    def cantidad_pagada(self):
+        total_pagado = Pago.objects.filter(prestamo=self).aggregate(total_pagado=Sum('monto_pago'))['total_pagado'] or 0
+        return total_pagado
+  
     def calcular_cantidad_restante(self):
-        pagos_realizados = self.pago_set.all()
-        cantidad_pagada = sum(pago.monto_pago for pago in pagos_realizados)
-        cantidad_restante = self.monto - cantidad_pagada
+        cantidad_restante = self.total_pagar - self.cantidad_pagada()
         return cantidad_restante
+    
+    
+    def save(self, *args, **kwargs):
+        if self.tasa_interes is not None:
+            tasa_decimal = self.tasa_interes / 100
+            self.total_pagar = self.monto + (self.monto * tasa_decimal)
+        else:
+            self.total_pagar = self.monto
+    
+        super().save(*args, **kwargs)
+    
     
     
 class Pago(models.Model):

@@ -1,0 +1,131 @@
+body{
+    color: #fff;
+   width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+span{
+    color: aqua;
+    font-weight: bold;    
+}
+
+.Completo{
+    color: #13fc0b;
+}
+
+.Incompleto{
+    color: rgb(255, 22, 22);
+}
+
+.contenido-pago{
+    margin: 100px;
+   display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    grid-auto-rows: 1fr;
+}
+
+.contenido-pago div{
+    border: 2px solid #fff;
+    border-radius: 10px;
+    height: 100%;
+}
+
+
+.contenido-pago div:nth-child(3){
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.info-pago{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.proceso-pago{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pago{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pago form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.pago select{
+    margin-top: 10px;
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+
+}
+
+.pago input{
+    margin-top: 10px;
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+}
+
+.buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.buttons button{
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    background-color: rgb(15, 248, 15);
+    color: #000000;
+}
+
+.buttons a{
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.7;
+    transition-duration: 0.3s;
+}
+
+.buttons a:hover{
+    opacity: 1;
+    transform: scale(1.1);
+    text-decoration:underline;
+    animation: 0.5s ease-in-out;
+}
+
+form select:read-only{
+    cursor:not-allowed;
+}
