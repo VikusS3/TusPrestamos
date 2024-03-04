@@ -10,6 +10,7 @@ class Cliente(models.Model):
     ## * la propiedad blacnk es para que el campo no sea obligatorio
     correo = models.CharField(max_length=100, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    avatar = models.URLField(blank=True, null=True)
     
     def __str__(self):
         return self.nombre

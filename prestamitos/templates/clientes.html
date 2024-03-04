@@ -53,9 +53,11 @@
     {% for cliente in clientes %}
     <article class="client-data">
       <figure>
-        <img src="https://i.ibb.co/RPMSC8c/SAUL.jpg" alt="" />
+        <!--Llamar a random_avatar de la vista creada-->
+        <img src="{{cliente.avatar}}" alt="Avatar" />
       </figure>
       <div class="info">
+        <p>{{random_avatar}}</p>
         <h2>{{cliente.nombre}}</h2>
         <p>{{cliente.telefono}}</p>
         <p>{{cliente.correo}}</p>

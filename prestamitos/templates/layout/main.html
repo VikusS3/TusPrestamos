@@ -1,24 +1,53 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/main_style.css' %}" />
-
-    <title>Tus Prestamitos</title>
+    <meta
+      name="description"
+      content="Aplicacion para administrar prestamos personales y poder llevar un mejor control de tus finanzas."
+    />
+    <title>
+      Tus Prestamitos | la mejor aplicacion para administrar prestamos
+    </title>
   </head>
   <body>
     <header>
-      <a href="{% url 'home' %}">Tus Prestamitos <-- AQUI IRA EL LOGO</a>
+      <a href="{% url 'home' %}">AQUI IRA EL LOGO</a>
+
       <nav>
         <a href="{% url 'prestamos' %}">Prestamos</a>
         <a href="{% url 'pagos' %}">Pagos</a>
         <a href="{% url 'clientes' %}">Contactos</a>
         <a href="{% url 'my_profile' %}">Mi Cuenta</a>
         <a href="{% url 'cerrar_sesion' %}">Cerrar Sesion</a>
+
+        
       </nav>
+      <div class="menu-button">
+        <button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-layout-navbar-expand"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M0 0h24v24H0z" stroke="none" />
+          <path
+            d="M4 18V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM4 9h16"
+          />
+          <path d="m10 14 2 2 2-2" />
+        </svg>
+      </button>
+      </div>
     </header>
 
     {% block content %} {% endblock %}
@@ -26,8 +55,7 @@
     <footer></footer>
 
     <!-- Incluir jQuery desde CDN -->
+    <script src="{% static 'js/index.js'  %}"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
- 
   </body>
 </html>
