@@ -4,8 +4,8 @@
 
 <section class="clientes">
   <div class="tools">
-    <form action="" method="get">
-      <input type="text" name="search" placeholder="Buscar cliente" />
+    <form action="{% url 'clientes' %}" method="get">
+      <input type="text" name="q" placeholder="Buscar cliente"/>
       <button type="submit">
         <svg
           xmlns="http://www.w3.org/2000/svg"

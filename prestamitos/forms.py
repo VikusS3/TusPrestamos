@@ -7,7 +7,7 @@ class ClienteForm(ModelForm):
         model = Cliente
         fields = ['nombre', 'telefono', 'correo']
         
-   
+
 class PrestamoForm(ModelForm):
     class Meta:
         model = Prestamo

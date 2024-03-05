@@ -6,10 +6,12 @@ from django.contrib.auth.models import User
 from .models import Cliente, Prestamo, Pago
 from django.contrib.auth.decorators import login_required
 from .forms import *
-from django.db.models import F
+from django.db.models import F, Q
 from .utils import get_random_avatar_url
 
 # Create your views here.
+
+
 def index(request):
     return render(request, 'index.html')
 
@@ -71,9 +73,16 @@ def my_profile(request):
 
 @login_required
 def clientes(request):
+    query = request.GET.get('q')
+    
     clientes = Cliente.objects.filter(user=request.user)
+    
+    if query:
+        clientes = clientes.filter(Q(nombre__icontains=query) | Q(telefono__icontains=query))
+    
     context = {
-        'clientes': clientes
+        'clientes': clientes,
+        'query': query,
     }
     return render(request, 'clientes.html', context)
 
@@ -87,7 +96,7 @@ def registrar_cliente(request):
             form = ClienteForm(request.POST)
             new_cliente = form.save(commit=False)
             new_cliente.user = request.user
-            
+
             new_cliente.avatar = get_random_avatar_url()
             new_cliente.save()
             return redirect('clientes')
@@ -120,12 +129,19 @@ def eliminar_cliente(request, id):
 
 @login_required
 def prestamos(request):
+
+    query = request.GET.get('q')
     # traer los prestamos del usuario logueado y traer el nombre del cliente
     prestamos = Prestamo.objects.select_related(
         'cliente').filter(user=request.user)
 
+    if query:
+        prestamos = prestamos.filter(
+            Q(cliente__nombre__icontains=query) | Q(monto__icontains=query))
+
     context = {
-        'prestamos': prestamos
+        'prestamos': prestamos,
+        'query': query
     }
     return render(request, 'prestamos.html', context)
 
@@ -199,6 +215,7 @@ def pagar_prestamo(request, id):
         return render(request, 'prestamos.html', {'error': 'Error al pagar el prestamo'})
 
 
+@login_required
 def eliminar_prestamo(request, id):
     prestamo = get_object_or_404(Prestamo, id=id, user=request.user)
     if request.method == 'POST' or request.method == 'GET':
@@ -206,11 +223,17 @@ def eliminar_prestamo(request, id):
         return redirect('prestamos')
 
 
+@login_required
 def pagos(request):
+    query = request.GET.get('q')
     pagos = Pago.objects.select_related('prestamo__cliente').all()
 
+    if query:
+        pagos = pagos.filter(Q(prestamo__cliente__nombre__icontains=query) | Q(
+            monto_pago__icontains=query))
+
     context = {
-        'pagos': pagos
+        'pagos': pagos,
+        'query': query
     }
     return render(request, 'pagos.html', context)
-

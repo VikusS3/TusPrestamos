@@ -3,8 +3,8 @@
 <link rel="stylesheet" href="{% static 'css/pagos.css' %}" />
 <section class="pagos">
   <div class="tools">
-    <form action="" method="get">
-      <input type="text" name="search" placeholder="Buscar pago" />
+    <form action="{% url 'pagos' %}" method="get">
+      <input type="text" name="q" placeholder="Buscar prestamo" value="" />
       <button type="submit">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -27,17 +27,16 @@
   </div>
   <div class="list-pagos">
     {% for pago in pagos %}
-      <article class="pago">
-        <div class="info-pago">
-          <h3>{{pago.prestamo.cliente}}</h3>
-          <p>{{pago.fecha_pago}}</p>
-        </div>
-        <div class="monto">
-          <p>S/.{{pago.monto_pago}}</p>
-        </div>
-      </article>
+    <article class="pago">
+      <div class="info-pago">
+        <h3>{{pago.prestamo.cliente}}</h3>
+        <p>{{pago.fecha_pago}}</p>
+      </div>
+      <div class="monto">
+        <p>S/.{{pago.monto_pago}}</p>
+      </div>
+    </article>
     {% endfor %}
-    
   </div>
 </section>
 
