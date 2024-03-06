@@ -153,6 +153,112 @@ figure img{
   color: #fff;
 }
 
+@media screen and (max-width:1024px) {
+  .list-clientes{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width:912px){
+    .list-clientes{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .tools{
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+}
+
+@media screen and (max-width:758px) {
+
+  .list-clientes{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .client-data{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .info{
+    margin-top: -20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow: hidden;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .tools-contact{
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width:580px){
+  .clientes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+  }
+
+  .list-clientes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .tools{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+}
+
+@media screen and (max-width:390px){
+  .prestamos{
+    width: 160%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+  }
+
+  .tools{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .list-prestamos{
+     /*que se ven dos columnas*/
+      grid-template-columns: repeat(1, 1fr);
+      margin: 0 20px;
+      width: 80%;
+  }
+}
+
 @media screen and (max-width: 764px) {
   .client-data{
     width: 100%;
