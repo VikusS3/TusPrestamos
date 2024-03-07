@@ -11,35 +11,25 @@
   <header>
     <h1>Crea una Cuenta</h1>
   </header>
-  <h1>{{error}}</h1>
+  {% if error %}
+    <h1 style="color: red;">{{error}}</h1>
+  {% endif %}
+
   <form action="/registrar_usuario/" method="post">
     {% csrf_token %}
     <div class="inputs">
-     
-      <input
-        type="text"
-        id="username"
-        name="username"
-        required
-        placeholder="Ingrese su Usuario"
-      />
+      <input type="text" name="first_name" maxlength="30" required="" aria-describedby="id_first_name_helptext" id="id_first_name" placeholder="Ingrese sus Nombres">
+      <input type="text" name="last_name" maxlength="50" required="" aria-describedby="id_last_name_helptext" id="id_last_name" placeholder="Ingrese sus Apellidos">
+      <input type="text" name="username" maxlength="150" autofocus="" required="" aria-describedby="id_username_helptext" id="id_username" placeholder="Ingrese su Usuario">
+      <input type="email" name="email" maxlength="254" required="" aria-describedby="id_email_helptext" id="id_email" placeholder="Ingrese su correo electronico">
+      <input type="password" name="password1" required="" aria-describedby="id_password_helptext" id="id_password"
+        placeholder="Ingrese su contraseña">
+      
+      <input type="password" name="password2" required="" aria-describedby="id_password2_helptext" id="id_password2"
+        placeholder="Confirme su contraseña">
     
-      <input
-        type="password"
-        id="password1"
-        name="password1"
-        required
-        placeholder="Ingrese su Contraseña"
-      />
-
-      <input
-        type="password"
-        id="password2"
-        name="password2"
-        required
-        placeholder="Confirme su Contraseña"
-      />
     </div>
+      
     <button>Crear Cuenta</button>
 
     <div class="back-arrow">

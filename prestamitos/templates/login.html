@@ -11,7 +11,11 @@
   <header>
     <h1>Iniciar Sesion</h1>
   </header>
-  <h1>{{error}}</h1>
+    {% if error %}
+      <h1 style="color: red;
+        text-align: center;
+      ">{{error}}</h1>
+    {% endif %}
   <form action="" method="post">
     {% csrf_token %}
     <div class="inputs">

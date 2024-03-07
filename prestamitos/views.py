@@ -1,14 +1,14 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from .models import Cliente, Prestamo, Pago
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from django.db.models import F, Q
+from allauth.account.decorators import verified_email_required
 from .utils import get_random_avatar_url
-
 # Create your views here.
 
 
@@ -43,24 +43,29 @@ def login_user(request):
 
 def registrar_usuario(request):
     if request.method == 'GET':
-        return render(request, 'registrar_usuario.html', {'form': UserCreationForm})
-
+        return render(request, 'registrar_usuario.html', {'form': CustomerCreationForm()})
     else:
-        if request.POST["password1"] == request.POST["password2"]:
+        existing_user = User.objects.filter(
+            email=request.POST['email']).exists()
+
+        if existing_user:
+            return render(request, 'registrar_usuario.html', {'form': CustomerCreationForm(), 'error': 'El correo ya esta registrado'})
+
+        if request.POST['password1'] == request.POST['password2']:
             try:
                 user = User.objects.create_user(
-                    username=request.POST["username"],
-                    password=request.POST["password1"]
-                )
+                    request.POST['username'], request.POST['email'], request.POST['password1'])
+                user.first_name = request.POST['first_name']
+                user.last_name = request.POST['last_name']
                 user.save()
                 login(request, user)
                 return redirect('home')
-            except:
-                return render(request, 'registrar_usuario.html', {'form': UserCreationForm, 'error': 'El usuario ya existe'})
+            except ValueError:
+                    return render(request, 'registrar_usuario.html', {'form': CustomerCreationForm(), 'error': 'Error al crear el usuario'})
         else:
-            return render(request, 'registrar_usuario.html', {'form': UserCreationForm, 'error': 'Las contraseñas no coinciden'})
-
-
+            return render(request, 'registrar_usuario.html', {'form': CustomerCreationForm(), 'error': 'Las contraseñas no coinciden'})        
+                          
+@login_required
 def cerrar_sesion(request):
     logout(request)
     return redirect('index')
@@ -74,12 +79,13 @@ def my_profile(request):
 @login_required
 def clientes(request):
     query = request.GET.get('q')
-    
+
     clientes = Cliente.objects.filter(user=request.user)
-    
+
     if query:
-        clientes = clientes.filter(Q(nombre__icontains=query) | Q(telefono__icontains=query))
-    
+        clientes = clientes.filter(
+            Q(nombre__icontains=query) | Q(telefono__icontains=query))
+
     context = {
         'clientes': clientes,
         'query': query,
@@ -226,14 +232,21 @@ def eliminar_prestamo(request, id):
 @login_required
 def pagos(request):
     query = request.GET.get('q')
-    pagos = Pago.objects.select_related('prestamo__cliente').all()
+    pagos = Pago.objects.select_related('prestamo').filter(
+        prestamo__user=request.user)
 
     if query:
-        pagos = pagos.filter(Q(prestamo__cliente__nombre__icontains=query) | Q(
-            monto_pago__icontains=query))
+        pagos = pagos.filter(
+            Q(prestamo__cliente__nombre__icontains=query) | Q(monto_pago__icontains=query))
 
     context = {
         'pagos': pagos,
         'query': query
     }
     return render(request, 'pagos.html', context)
+
+
+##TODO: aqui estara la logica para poder mandar un email de confirmacion de cuenta
+@verified_email_required
+def verificar_users_only_view(request):
+    return render(request, 'verificar_users_only.html')
